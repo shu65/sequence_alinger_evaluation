@@ -1,0 +1,36 @@
+blast:
+  blast_home: /home/shu/local/apps/ncbi-blast-2.7.1+
+  make_db:
+    -blast:
+  - blast_home:
+      - /home/shu/local/apps/ncbi-blast-2.7.1+
+    database:
+      - path: /home/shu/workspace/sequence_alinger_evaluation/data/test_database.fasta
+        dbtype: prot
+    query:
+      - path: /home/shu/workspace/sequence_alinger_evaluation/data/test_query0.fasta
+      - path: /home/shu/workspace/sequence_alinger_evaluation/data/test_query1.fasta
+    makeblastdb_options:
+      - '-hash_index'
+    blastx_options:
+      - '-out output.tsv -outfmt 6 -comp_based_stats 0'
+
+diamond:
+  - diamond_home:
+      - /home/shu/local/apps/diamond_v0.9.13
+    database:
+      - path: /home/shu/workspace/sequence_alinger_evaluation/data/test_database.fasta
+    query:
+      - path: /home/shu/workspace/sequence_alinger_evaluation/data/test_query0.fasta
+      - path: /home/shu/workspace/sequence_alinger_evaluation/data/test_query1.fasta
+    makedb_options:
+      - ''
+    blastx_sensitive:
+      - ''
+      - '--sensitive'
+      - '--more-sensitive'
+    blastx_index-chunks:
+      - '--index-chunks 1'
+      - '--index-chunks 4'
+    blastx_options:
+      - '-o output.tsv -f 6 --comp-based-stats 0'
